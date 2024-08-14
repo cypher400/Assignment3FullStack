@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('layout/head'); -%>
+
+<body>
+    <%- include('layout/navbar'); %>
+    <!-- Page Header-->
+    <header style="background-image: url('assets/img/contact-bg.jpg')">
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                
+                    <h1 class="display-4 ">G Test</h1>
+                    <p class="lead">Book your G DriveTest</p>
+            </div>
+        </div>
+    </header>
+    <!-- Main Content-->
+    <main class="mb-4">
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <form method="post" action="/g">
+                    
+                    </form>
+                    <% if (typeof error !== 'undefined' && error) { %>
+                        <p><%= error %></p>
+                        <button class="button-28" role="button"> <a class="nav-link px-lg-3 py-3 py-lg-4" href="/g2">Go to G2 Page for registration</a></button>
+                    <% } else if (typeof user !== 'undefined' && user) { %>
+                        <form method="post" action="/g"> 
+                            <input type="hidden" name="userId" value="<%= user._id %>"> 
+                            <p>Name: <%= user.firstName %> <%= user.lastName %></p>
+                            <p>License Number: <%= user.licenseNumber %></p>
+                            <p>Age: <%= user.age %></p>
+                            <% if (user.dob instanceof Date) { %>
+                                <p>Date of Birth: <%= user.dob.toLocaleDateString('en-CA') %></p>
+                            <% } else { %>
+                                <p>Date of Birth: <%= user.dob %></p>
+                            <% } %>
+                            <div class="mb-3">
+                                <label for="make" class="form-label">Make</label>
+                                <input type="text" class="form-control" id="make" name="make" value="<%= user.make %>" required />
+                            </div>
+                            <div class="mb-3">
+                                <label for="model" class="form-label">Model</label>
+                                <input type="text" class="form-control" id="model" name="model" value="<%= user.model %>" required />
+                            </div>
+                            <div class="mb-3">
+                                <label for="year" class="form-label">Year</label>
+                                <input type="number" class="form-control" id="year" name="year" value="<%= user.year %>" required />
+                            </div>
+                            <div class="mb-3">
+                                <label for="plateNumber" class="form-label">Plate Number</label>
+                                <input type="text" class="form-control" id="plateNumber" name="plateNumber" value="<%= user.plateNumber %>" required />
+                            </div>
+                            <button type="submit" class="btn btn-primary">Update Car Information</button>
+                        </form>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </main>
+    <%- include('layout/footer'); %>
+    <%- include('layout/script'); %>
+</body>
+
+</html>
+
